@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E2DD6E72A5685E10029FE58 /* CloudIdleAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E2DD6E62A5685E10029FE58 /* CloudIdleAnimation.json */; };
+		4E2DD6E92A5685F20029FE58 /* NSLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DD6E82A5685F20029FE58 /* NSLottieView.swift */; platformFilters = (macos, ); };
+		4E3FF99F2A56944C004630D7 /* UILottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3FF99E2A56944C004630D7 /* UILottieView.swift */; platformFilter = ios; };
 		4EB89F9F2A45FBB100C83CE2 /* CloudClearApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB89F9E2A45FBB100C83CE2 /* CloudClearApp.swift */; };
 		4EB89FA12A45FBB100C83CE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB89FA02A45FBB100C83CE2 /* ContentView.swift */; };
 		4EB89FA32A45FBB200C83CE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EB89FA22A45FBB200C83CE2 /* Assets.xcassets */; };
@@ -14,6 +17,9 @@
 		4EB89FB12A45FBB200C83CE2 /* CloudClearTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB89FB02A45FBB200C83CE2 /* CloudClearTests.swift */; };
 		4EB89FBB2A45FBB200C83CE2 /* CloudClearUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB89FBA2A45FBB200C83CE2 /* CloudClearUITests.swift */; };
 		4EB89FBD2A45FBB200C83CE2 /* CloudClearUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB89FBC2A45FBB200C83CE2 /* CloudClearUITestsLaunchTests.swift */; };
+		4EC76EC22A53E811001D39C7 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC76EC12A53E811001D39C7 /* PhotoViewModel.swift */; };
+		4EF016D32A56A70D0038B698 /* Lottie.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF016D12A56A6DD0038B698 /* Lottie.xcframework */; settings = {ATTRIBUTES = (Required, ); }; };
+		4EF016D42A56A70D0038B698 /* Lottie.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF016D12A56A6DD0038B698 /* Lottie.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +39,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		4EF016D52A56A70D0038B698 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4EF016D42A56A70D0038B698 /* Lottie.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		4E2DD6E62A5685E10029FE58 /* CloudIdleAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CloudIdleAnimation.json; sourceTree = "<group>"; };
+		4E2DD6E82A5685F20029FE58 /* NSLottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLottieView.swift; sourceTree = "<group>"; };
+		4E3FF99E2A56944C004630D7 /* UILottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILottieView.swift; sourceTree = "<group>"; };
 		4EB89F9B2A45FBB100C83CE2 /* CloudClear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudClear.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EB89F9E2A45FBB100C83CE2 /* CloudClearApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudClearApp.swift; sourceTree = "<group>"; };
 		4EB89FA02A45FBB100C83CE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -45,6 +68,9 @@
 		4EB89FB62A45FBB200C83CE2 /* CloudClearUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CloudClearUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EB89FBA2A45FBB200C83CE2 /* CloudClearUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudClearUITests.swift; sourceTree = "<group>"; };
 		4EB89FBC2A45FBB200C83CE2 /* CloudClearUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudClearUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4EC76EC02A53E674001D39C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4EC76EC12A53E811001D39C7 /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
+		4EF016D12A56A6DD0038B698 /* Lottie.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Lottie.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EF016D32A56A70D0038B698 /* Lottie.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,9 +99,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E2DD6E52A5685D60029FE58 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				4E2DD6E62A5685E10029FE58 /* CloudIdleAnimation.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		4EB89F922A45FBB100C83CE2 = {
 			isa = PBXGroup;
 			children = (
+				4EF016D02A56A6D30038B698 /* Frameworks */,
 				4EB89F9D2A45FBB100C83CE2 /* CloudClear */,
 				4EB89FAF2A45FBB200C83CE2 /* CloudClearTests */,
 				4EB89FB92A45FBB200C83CE2 /* CloudClearUITests */,
@@ -95,7 +131,12 @@
 		4EB89F9D2A45FBB100C83CE2 /* CloudClear */ = {
 			isa = PBXGroup;
 			children = (
+				4E2DD6E52A5685D60029FE58 /* Lottie */,
+				4EC76EC02A53E674001D39C7 /* Info.plist */,
 				4EB89F9E2A45FBB100C83CE2 /* CloudClearApp.swift */,
+				4E2DD6E82A5685F20029FE58 /* NSLottieView.swift */,
+				4E3FF99E2A56944C004630D7 /* UILottieView.swift */,
+				4EC76EC12A53E811001D39C7 /* PhotoViewModel.swift */,
 				4EB89FA02A45FBB100C83CE2 /* ContentView.swift */,
 				4EB89FA22A45FBB200C83CE2 /* Assets.xcassets */,
 				4EB89FA72A45FBB200C83CE2 /* CloudClear.entitlements */,
@@ -129,6 +170,14 @@
 			path = CloudClearUITests;
 			sourceTree = "<group>";
 		};
+		4EF016D02A56A6D30038B698 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4EF016D12A56A6DD0038B698 /* Lottie.xcframework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -139,12 +188,15 @@
 				4EB89F972A45FBB100C83CE2 /* Sources */,
 				4EB89F982A45FBB100C83CE2 /* Frameworks */,
 				4EB89F992A45FBB100C83CE2 /* Resources */,
+				4EF016D52A56A70D0038B698 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = CloudClear;
+			packageProductDependencies = (
+			);
 			productName = CloudClear;
 			productReference = 4EB89F9B2A45FBB100C83CE2 /* CloudClear.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +269,8 @@
 				Base,
 			);
 			mainGroup = 4EB89F922A45FBB100C83CE2;
+			packageReferences = (
+			);
 			productRefGroup = 4EB89F9C2A45FBB100C83CE2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -234,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EB89FA62A45FBB200C83CE2 /* Preview Assets.xcassets in Resources */,
+				4E2DD6E72A5685E10029FE58 /* CloudIdleAnimation.json in Resources */,
 				4EB89FA32A45FBB200C83CE2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,7 +315,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EB89FA12A45FBB100C83CE2 /* ContentView.swift in Sources */,
+				4EC76EC22A53E811001D39C7 /* PhotoViewModel.swift in Sources */,
 				4EB89F9F2A45FBB100C83CE2 /* CloudClearApp.swift in Sources */,
+				4E2DD6E92A5685F20029FE58 /* NSLottieView.swift in Sources */,
+				4E3FF99F2A56944C004630D7 /* UILottieView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,13 +405,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Debug;
 		};
@@ -401,6 +460,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -415,25 +475,44 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CODE_SIGN_ENTITLEMENTS = CloudClear/CloudClear.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"CloudClear/Preview Content\"";
 				DEVELOPMENT_TEAM = T7FZ9BC92M;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CloudClear/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "CloudClear requires use of the Photo Library to sort it.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
+					"@executable_path/Frameworks",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.elijahciali.CloudClear;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -442,25 +521,44 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CODE_SIGN_ENTITLEMENTS = CloudClear/CloudClear.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"CloudClear/Preview Content\"";
 				DEVELOPMENT_TEAM = T7FZ9BC92M;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CloudClear/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "CloudClear requires use of the Photo Library to sort it.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
+					"@executable_path/Frameworks",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.elijahciali.CloudClear;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

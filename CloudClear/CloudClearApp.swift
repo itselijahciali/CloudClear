@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Photos
 
 @main
 struct CloudClearApp: App {
@@ -13,5 +14,9 @@ struct CloudClearApp: App {
         WindowGroup {
             ContentView()
         }
+        #if os(macOS)
+        .windowStyle(HiddenTitleBarWindowStyle())
+        #endif
     }
+    
 }
