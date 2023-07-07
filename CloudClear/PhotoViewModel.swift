@@ -37,22 +37,27 @@ class PhotoViewModel: ObservableObject {
     func getAllPhotosSortedByFileSize(completion: @escaping () -> Void) {
         sortProgress = 0.0
         
+        // Set fetch options to include everything
         let fetchOptions = PHFetchOptions()
         fetchOptions.includeAllBurstAssets = true
         fetchOptions.includeHiddenAssets = true
         
-        let collections = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumLivePhotos, options: nil)
-        //let collections = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: nil)
+        // When debugging it's helpful to uncomment this line and comment the next so you don't have to sort an entire library each time
+        
+        //let collections = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumLivePhotos, options: nil)
+        let collections = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: nil)
         
         var assetsWithSize: [(asset: PHAsset, fileSize: Int64)] = []
-        var uniqueAssets: Set<PHAsset> = []
+        var uniqueAssets: Set<PHAsset> = [] // Weird iOS bug returns 2 of each asset, so we need to detedct duplicates
         
         var totalAssetsCount = 0
         
+        // Find total assets, so we can check progress
         collections.enumerateObjects { collection, _, _ in
             let assets = PHAsset.fetchAssets(in: collection, options: fetchOptions)
             totalAssetsCount += assets.count
         }
+        
         let sortingQueue = DispatchQueue(label: "sortingQueue", qos: .userInitiated)
         
         sortingQueue.async {
@@ -86,7 +91,7 @@ class PhotoViewModel: ObservableObject {
                 self.sortingComplete = true
             }
             
-            completion()
+            completion() // No error handling because I haven't cleaned up the code yet
             
         }
         

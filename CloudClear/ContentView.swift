@@ -90,20 +90,38 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                purpleGradient.edgesIgnoringSafeArea(.all)
-                if sortingComplete {
-                    PhotoView(viewModel: viewModel)
-                } else {
+                purpleGradient
+                #if os(iOS)
+                    .edgesIgnoringSafeArea(.all)
+                #endif
+                VStack{
                     StartView(viewModel: viewModel,sortingComplete: self.$sortingComplete)
+                    #if os(macOS)
+                        .background(sortingComplete ? Color.black.opacity(0.5) : nil)
+                    #endif
+                        .frame(maxHeight:sortingComplete ? 50 : .infinity)
+                        .animation(.easeOut(duration: 0.2), value: sortingComplete)
+                    if sortingComplete {
+                        PhotoView(viewModel: viewModel)
+                    }
                 }
-                
             }
+            #if os(macOS)
+            .edgesIgnoringSafeArea(.all)
+            #endif
         }//.navigationBarHidden(true)
     }
     
 }
 
+struct NewView: View {
+    var body: some View {
+        Text("Hello World")
+    }
+}
+
 struct StartView: View {
+
     @ObservedObject var viewModel: PhotoViewModel
     @Binding var sortingComplete: Bool
     
@@ -115,35 +133,40 @@ struct StartView: View {
          }*/
         
         VStack {
-            Spacer()
-            whitePurpleGradient.mask(
-                VStack{
-                    Text("CloudClear").font(.system(size:60,weight:.bold,design:.rounded))
-                    Text("Finally reclaim your cloud sotrage!").font(.system(size:20,weight:.bold,design:.rounded))
-                }
-            ).frame(maxHeight:100)
-            LottieView(lottieFile: "CloudIdleAnimation")
-            HStack{
-                if(viewModel.sortProgress == 0.0) {
+            if (!sortingComplete) {
+                whitePurpleGradient.mask(
                     VStack{
-                        Button("Sort Photos"){
-                            viewModel.getAllPhotosSortedByFileSize {
-                                self.sortingComplete.toggle()
-                            }
-                        }
-                        .buttonStyle(PrimaryButton(backgroundGradient: whitePurpleGradient,textColor: Color("BasePurpleShad")))
-                    }.padding()
-                } else {
-                    
-                    ProgressView(value: viewModel.sortProgress, total: 1.0){
-                        Text(String(format: "%.0f",round(100*viewModel.sortProgress))+"%")
+                        Text("CloudClear").font(.system(size:60,weight:.bold,design:.rounded))
+                        Text("Finally reclaim your cloud sotrage!").font(.system(size:20,weight:.bold,design:.rounded))
                     }
-                    .tint(.white)
-                    .padding()
-                    .transition(.move(edge:.trailing))
-                }
-            }.frame(height:100)
-        }.padding([.top,.bottom],50)
+                ).frame(maxHeight:100)
+            }
+            LottieView(lottieFile: "CloudIdleAnimation")
+            if (!sortingComplete) {
+                HStack{
+                    if(viewModel.sortProgress == 0.0) {
+                        VStack{
+                            Button("Sort Photos"){
+                                viewModel.getAllPhotosSortedByFileSize {
+                                    self.sortingComplete.toggle()
+                                }
+                            }
+                            .buttonStyle(PrimaryButton(backgroundGradient: whitePurpleGradient,textColor: Color("BasePurpleShad")))
+                        }.padding()
+                    } else {
+                        
+                        ProgressView(value: viewModel.sortProgress, total: 1.0){
+                            Text(String(format: "%.0f",round(100*viewModel.sortProgress))+"%")
+                                .font(.system(size:20,weight:.bold,design:.rounded))
+                                .foregroundColor(Color("WhitePurple"))
+                        }
+                        .tint(.white)
+                        .padding()
+                        .transition(.move(edge:.trailing))
+                    }
+                }.frame(height:100)
+            }
+        }.padding([.top,.bottom],sortingComplete ? 0 : 50)
     }
 }
 
@@ -152,13 +175,14 @@ struct PhotoView: View {
     
     var body: some View {
         VStack {
+            /*
 #if os(macOS)
             VStack{
                 Spacer()
             }
             .frame(maxWidth: .infinity,maxHeight:1)
             .background(Color.white.opacity(0.5))
-#endif
+#endif*/
             List(Array(viewModel.sortedAssets.enumerated()), id: \.offset) { index, asset in
                 VStack {
                     HStack {
@@ -195,11 +219,10 @@ struct PhotoView: View {
                 .frame(maxWidth: .infinity)
                 .contentShape(Rectangle())
                 .background(viewModel.assetsToDelete.contains(asset) ? Color("WhitePurple") : nil)
-                .onTapGesture {
-                    DispatchQueue.main.async {
-                    }
-                }
-            }.scrollContentBackground(.hidden)
+                
+            }
+            .colorScheme(.light)
+            //.scrollContentBackground(.hidden)
             
             VStack{
                 if !viewModel.assetsToDelete.isEmpty {
@@ -223,13 +246,18 @@ struct PhotoView: View {
                             }
                         }
                     }
+                        .buttonStyle(PrimaryButton(backgroundGradient: whitePurpleGradient,textColor: Color("BasePurpleShad")))
                     Text("Total File Size: \(ByteCountFormatter.string(fromByteCount: viewModel.totalFileSize, countStyle: .file))")
+                        .font(.system(size:10,weight:.bold,design:.rounded))
+                        .foregroundColor(Color("WhitePurple"))
                 } else {
                     Text("No items selected")
+                        .font(.system(size:10,weight:.bold,design:.rounded))
+                        .foregroundColor(Color("WhitePurple"))
                 }
             }
-            .frame(maxWidth: .infinity,minHeight:100)
-            .background(Color.white.opacity(0.5))
+            .frame(maxWidth: .infinity,minHeight:120)
+            .background(Color.black.opacity(0.5))
         }
     }
     
