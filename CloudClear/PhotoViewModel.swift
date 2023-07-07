@@ -11,7 +11,8 @@ class PhotoViewModel: ObservableObject {
     @Published var sortedAssets: [PHAsset] = []
     @Published var sortProgress: Float = 0
     @Published var sortingComplete: Bool = false
-    @Published var selectedAssets: [PHAsset] = []
+    @Published var assetsToDelete: [PHAsset] = []
+    @Published var assetsToSave: [PHAsset] = []
     @Published var saveProgress: Float = 0.0
     
     var totalFileSize: Int64 {
@@ -21,7 +22,7 @@ class PhotoViewModel: ObservableObject {
     private func calculateTotalFileSize() -> Int64 {
         var totalFileSize: Int64 = 0
         
-        for asset in selectedAssets {
+        for asset in assetsToDelete {
             let resources = PHAssetResource.assetResources(for: asset)
             for resource in resources {
                 if let fileSize = resource.value(forKey: "fileSize") as? Int64 {
@@ -40,7 +41,7 @@ class PhotoViewModel: ObservableObject {
         fetchOptions.includeAllBurstAssets = true
         fetchOptions.includeHiddenAssets = true
         
-        let collections = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumVideos, options: nil)
+        let collections = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumLivePhotos, options: nil)
         //let collections = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: nil)
         
         var assetsWithSize: [(asset: PHAsset, fileSize: Int64)] = []
@@ -92,12 +93,12 @@ class PhotoViewModel: ObservableObject {
         
     }
     
-    func saveSelectedAssets(completion: @escaping (URL?, Error?) -> Void) {
+    func saveAssets(completion: @escaping (URL?, Error?) -> Void) {
         let fileManager = FileManager.default
         let documentDirectory = try! fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         saveProgress = 0.0
         
-        for asset in selectedAssets {
+        for asset in assetsToSave {
             if asset.mediaType == .image {
                 let requestOptions = PHImageRequestOptions()
                 requestOptions.isSynchronous = true
@@ -116,6 +117,7 @@ class PhotoViewModel: ObservableObject {
                         }
                     }
                 }
+                
             } else if asset.mediaType == .video {
                 #if os(iOS)
                 completion(nil, NSError(domain: "com.example.app", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to retrieve asset resource."]))
@@ -262,6 +264,26 @@ class PhotoViewModel: ObservableObject {
               }
               */
         }
+    }
+    
+    func deleteAssets(completion: @escaping (Error?) -> Void) {
+        let deleteQueue = Array(assetsToDelete)
+        
+        PHPhotoLibrary.shared().performChanges {
+            PHAssetChangeRequest.deleteAssets(deleteQueue as NSFastEnumeration)
+            }
+            completionHandler: { success, error in
+                if success {
+                    // Assets deleted successfully
+                    DispatchQueue.main.async {
+                        self.assetsToDelete.removeAll()
+                    }
+                    completion(nil)
+                } else if let error = error {
+                    // Handle error
+                    completion(error)
+                }
+            }
     }
     
     /*
