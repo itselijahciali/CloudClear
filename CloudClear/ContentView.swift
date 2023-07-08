@@ -92,14 +92,14 @@ struct ContentView: View {
             ZStack {
                 purpleGradient
                 #if os(iOS)
-                    .edgesIgnoringSafeArea(.all)
+                    .edgesIgnoringSafeArea(.all) // On iOS only the gradient ignores safe area
                 #endif
                 VStack{
                     StartView(viewModel: viewModel,sortingComplete: self.$sortingComplete)
                     #if os(macOS)
-                        .background(sortingComplete ? Color.black.opacity(0.5) : nil)
+                        .background(sortingComplete ? Color.black.opacity(0.5) : nil) // Darker title bar in PhotoView
                     #endif
-                        .frame(maxHeight:sortingComplete ? 50 : .infinity)
+                        .frame(maxHeight:sortingComplete ? 50 : .infinity) // StartView remains with just the cloud animation
                         .animation(.easeOut(duration: 0.2), value: sortingComplete)
                     if sortingComplete {
                         PhotoView(viewModel: viewModel)
@@ -107,7 +107,7 @@ struct ContentView: View {
                 }
             }
             #if os(macOS)
-            .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.all) // On macOS everything ignores the safe area since we nuked the title bar
             #endif
         }//.navigationBarHidden(true)
     }
@@ -210,12 +210,13 @@ struct PhotoView: View {
                         Text(fileSizeString(for: asset))
                             .font(.caption)
                             .foregroundColor(.secondary)
+                        #if os(macOS)
                         Button("Save") {toggleSave(for: asset)}
                             .buttonStyle(SecondaryButton(backgroundGradient: blueGradient,textColor: Color("BaseBlueLight")))
-                        #if os(iOS)
-                            .disabled(true)
-                            .opacity(0.25)
-                        #elseif os(macOS)
+                            .opacity(viewModel.assetsToSave.contains(asset) ? 1.0 : 0.5)
+                        #elseif os(iOS)
+                        Button("Share") {toggleShare(for: asset)}
+                            .buttonStyle(SecondaryButton(backgroundGradient: blueGradient,textColor: Color("BaseBlueLight")))
                             .opacity(viewModel.assetsToSave.contains(asset) ? 1.0 : 0.5)
                         #endif
                         Button("Delete") {toggleDelete(for: asset)}
@@ -290,6 +291,15 @@ struct PhotoView: View {
             viewModel.assetsToSave.append(asset)
         }
     }
+    
+    func toggleShare(for asset: PHAsset) {
+        if viewModel.assetsToShare.contains(asset) {
+            viewModel.assetsToShare.removeAll { $0 == asset }
+        } else {
+            viewModel.assetsToShare.append(asset)
+        }
+    }
+    
     func toggleDelete(for asset: PHAsset) {
         if viewModel.assetsToDelete.contains(asset) {
             viewModel.assetsToDelete.removeAll { $0 == asset }

@@ -13,6 +13,7 @@ class PhotoViewModel: ObservableObject {
     @Published var sortingComplete: Bool = false
     @Published var assetsToDelete: [PHAsset] = []
     @Published var assetsToSave: [PHAsset] = []
+    @Published var assetsToShare: [PHAsset] = []
     @Published var saveProgress: Float = 0.0
     
     var totalFileSize: Int64 {
