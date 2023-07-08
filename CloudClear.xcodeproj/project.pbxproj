@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E2DD6E72A5685E10029FE58 /* CloudIdleAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E2DD6E62A5685E10029FE58 /* CloudIdleAnimation.json */; };
 		4E2DD6E92A5685F20029FE58 /* NSLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2DD6E82A5685F20029FE58 /* NSLottieView.swift */; platformFilters = (macos, ); };
 		4E3FF99F2A56944C004630D7 /* UILottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3FF99E2A56944C004630D7 /* UILottieView.swift */; platformFilter = ios; };
 		4E9AB1182A58C539005B0DD7 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 4E9AB1172A58C539005B0DD7 /* Lottie */; };
+		4E9AB11A2A58EA15005B0DD7 /* CloudIdleAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E9AB1192A58EA15005B0DD7 /* CloudIdleAnimation.json */; };
 		4EB89F9F2A45FBB100C83CE2 /* CloudClearApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB89F9E2A45FBB100C83CE2 /* CloudClearApp.swift */; };
 		4EB89FA12A45FBB100C83CE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB89FA02A45FBB100C83CE2 /* ContentView.swift */; };
 		4EB89FA32A45FBB200C83CE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EB89FA22A45FBB200C83CE2 /* Assets.xcassets */; };
@@ -52,9 +52,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4E2DD6E62A5685E10029FE58 /* CloudIdleAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CloudIdleAnimation.json; sourceTree = "<group>"; };
 		4E2DD6E82A5685F20029FE58 /* NSLottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLottieView.swift; sourceTree = "<group>"; };
 		4E3FF99E2A56944C004630D7 /* UILottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILottieView.swift; sourceTree = "<group>"; };
+		4E9AB1192A58EA15005B0DD7 /* CloudIdleAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = CloudIdleAnimation.json; path = "../../../../../Projects/Animation/2023/230705 CloudClear Lottie/CloudIdleAnimation.json"; sourceTree = "<group>"; };
 		4EB89F9B2A45FBB100C83CE2 /* CloudClear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudClear.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EB89F9E2A45FBB100C83CE2 /* CloudClearApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudClearApp.swift; sourceTree = "<group>"; };
 		4EB89FA02A45FBB100C83CE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 		4E2DD6E52A5685D60029FE58 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
-				4E2DD6E62A5685E10029FE58 /* CloudIdleAnimation.json */,
+				4E9AB1192A58EA15005B0DD7 /* CloudIdleAnimation.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -277,8 +277,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E9AB11A2A58EA15005B0DD7 /* CloudIdleAnimation.json in Resources */,
 				4EB89FA62A45FBB200C83CE2 /* Preview Assets.xcassets in Resources */,
-				4E2DD6E72A5685E10029FE58 /* CloudIdleAnimation.json in Resources */,
 				4EB89FA32A45FBB200C83CE2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

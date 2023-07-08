@@ -86,7 +86,7 @@ class PhotoViewModel: ObservableObject {
             let sortedAssetsOnly = sortedAssets.map { $0.asset }
             
             DispatchQueue.main.async {
-                let topAssets = Array(sortedAssetsOnly.prefix(100))
+                let topAssets = Array(sortedAssetsOnly.prefix(1000))
                 self.sortedAssets = topAssets
                 self.sortingComplete = true
             }
@@ -280,9 +280,6 @@ class PhotoViewModel: ObservableObject {
             completionHandler: { success, error in
                 if success {
                     // Assets deleted successfully
-                    DispatchQueue.main.async {
-                        self.assetsToDelete.removeAll()
-                    }
                     completion(nil)
                 } else if let error = error {
                     // Handle error

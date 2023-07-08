@@ -174,7 +174,7 @@ struct PhotoView: View {
     @ObservedObject var viewModel: PhotoViewModel
     
     var body: some View {
-        VStack {
+        VStack(spacing:0) {
             /*
 #if os(macOS)
             VStack{
@@ -191,60 +191,82 @@ struct PhotoView: View {
                             Image(nsImage: thumbnail)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 80, height: 80)
+                                .frame(width: 120, height: 120)
 #else
                             Image(uiImage: thumbnail)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 80, height: 80)
+                                .frame(width: 120, height: 120)
 #endif
                         } else {
                             Color.gray
-                                .frame(width: 80, height: 80)
+                                .frame(width: 120, height: 120)
                         }
-                        Text(asset.localIdentifier)
+                        if let fileName = fetchFileName(for: asset) {
+                            Text(fileName)
+                        }
                     }
                     HStack{
                         Text(fileSizeString(for: asset))
                             .font(.caption)
                             .foregroundColor(.secondary)
-                        Button("Save") {
-                            toggleSave(for: asset)
-                        }.buttonStyle(SecondaryButton(backgroundGradient: blueGradient,textColor: Color("BaseBlueLight")))
-                        Button("Delete") {
-                            toggleDelete(for: asset)
-                        }.buttonStyle(SecondaryButton(backgroundGradient: redGradient,textColor: Color("BaseRedLight")))
+                        Button("Save") {toggleSave(for: asset)}
+                            .buttonStyle(SecondaryButton(backgroundGradient: blueGradient,textColor: Color("BaseBlueLight")))
+                        #if os(iOS)
+                            .disabled(true)
+                            .opacity(0.25)
+                        #elseif os(macOS)
+                            .opacity(viewModel.assetsToSave.contains(asset) ? 1.0 : 0.5)
+                        #endif
+                        Button("Delete") {toggleDelete(for: asset)}
+                            .buttonStyle(SecondaryButton(backgroundGradient: redGradient,textColor: Color("BaseRedLight")))
+                            .opacity(viewModel.assetsToDelete.contains(asset) ? 1.0 : 0.5)
                     }
                 }
                 .frame(maxWidth: .infinity)
-                .contentShape(Rectangle())
-                .background(viewModel.assetsToDelete.contains(asset) ? Color("WhitePurple") : nil)
-                
+                .padding(5)
+                .background(
+                    RoundedRectangle(
+                        cornerRadius: 10,
+                        style: .continuous
+                    ).fill(Color(.white))
+                )
+                .padding(2)
             }
             .colorScheme(.light)
-            //.scrollContentBackground(.hidden)
+            .scrollContentBackground(.hidden)
             
             VStack{
-                if !viewModel.assetsToDelete.isEmpty {
+                if !viewModel.assetsToDelete.isEmpty || !viewModel.assetsToSave.isEmpty {
                     Button("Continue") {
                         viewModel.saveAssets(){ (exportedURL, error) in
                             if let url = exportedURL {
-                                // Video exported successfully, do something with the URL
                                 print("Exported video URL: \(url)")
-                                viewModel.assetsToSave.removeAll()
+                                DispatchQueue.main.async {
+                                    viewModel.assetsToSave.removeAll()
+                                }
+                                
+                                viewModel.deleteAssets(){ (error) in
+                                    if let error = error {
+                                        print("Delete error: \(error.localizedDescription)")
+                                    } else {
+                                        print("Deleted asset successfully")
+                                        DispatchQueue.main.async {
+                                            viewModel.sortedAssets.removeAll{ asset in
+                                                viewModel.assetsToDelete.contains(asset)
+                                            }
+                                        }
+                                        viewModel.assetsToDelete.removeAll()
+                                        
+                                    }
+                                }
+                                
                             } else if let exportError = error {
                                 // Handle export error
                                 print("Export error: \(exportError.localizedDescription)")
                             }
                         }
-                        viewModel.deleteAssets(){ (error) in
-                            if let error = error {
-                                // Handle deletion error
-                                print("Failed to delete assets: \(error)")
-                            } else {
-                                viewModel.assetsToDelete.removeAll()
-                            }
-                        }
+                        
                     }
                         .buttonStyle(PrimaryButton(backgroundGradient: whitePurpleGradient,textColor: Color("BasePurpleShad")))
                     Text("Total File Size: \(ByteCountFormatter.string(fromByteCount: viewModel.totalFileSize, countStyle: .file))")
@@ -299,7 +321,7 @@ struct PhotoView: View {
         
         PHImageManager.default().requestImage(
             for: asset,
-            targetSize: CGSize(width: 80, height: 80),
+            targetSize: CGSize(width: 120, height: 120),
             contentMode: .aspectFill,
             options: requestOptions,
             resultHandler: { image, _ in
@@ -308,6 +330,11 @@ struct PhotoView: View {
         )
         
         return thumbnailImage
+    }
+    
+    func fetchFileName(for asset: PHAsset) -> String? {
+        let resource = PHAssetResource.assetResources(for: asset).first
+        return resource?.originalFilename
     }
     
     func fileSizeString(for asset: PHAsset) -> String {
